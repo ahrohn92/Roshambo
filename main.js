@@ -1,51 +1,27 @@
-const { argv } = require('yargs')
+const {argv} = require('yargs')
 
 const playerMove = argv.move
 const moves = ['rock', 'paper', 'scissors']
 const computerMove = moves[Math.floor(Math.random() * moves.length)]
 
+var winningMoves = {
+    'rock': 'paper',
+    'paper': 'scissors',
+    'scissors': 'rock'
+}
+
 class Game {
 
-    constructor(playerMove, computerMove) {
+    constructor(playerMove, computerMove, winningMoves) {
         this.playerMove = playerMove
         this.computerMove = computerMove
+        this.winningMoves = winningMoves
         this.result = ''
     }
 
     play() {
-        if (this.playerMove === 'rock') {
-            if (this.computerMove === 'rock') {
-                this.result = '~The game was a tie.~'
-            }
-            if (this.computerMove === 'paper') {
-                this.result = '~Computer wins.~'
-            }
-            if (this.computerMove === 'scissors') {
-                this.result = '~Player wins.~'
-            }
-        }
-        if (this.playerMove === 'paper') {
-            if (this.computerMove === 'rock') {
-                this.result = '~Player wins.~'
-            }
-            if (this.computerMove === 'paper') {
-                this.result = '~The game was a tie.~'
-            }
-            if (this.computerMove === 'scissors') {
-                this.result = '~Computer wins.~'
-            }
-        }
-        if (this.playerMove === 'scissors') {
-            if (this.computerMove === 'rock') {
-                this.result = '~Computer wins.~'
-            }
-            if (this.computerMove === 'paper') {
-                this.result = '~Player wins.~'
-            }
-            if (this.computerMove === 'scissors') {
-                this.result = '~The game was a tie.~'
-            }
-        }
+        this.playerMove === this.computerMove ? this.result = '~The game was a tie.~' : 
+        (this.computerMove === this.winningMoves[this.playerMove] ? this.result = '~Computer wins.~' : this.result = '~Player wins.~')
     }
 }
 
@@ -64,6 +40,6 @@ class Output {
     }
 }
 
-var game = new Game(playerMove, computerMove)
+var game = new Game(playerMove, computerMove, winningMoves)
 var output = new Output(game)
 output.displayOutput()
