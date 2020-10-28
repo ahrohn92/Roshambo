@@ -1,15 +1,5 @@
 const {argv} = require('yargs')
 
-const playerMove = argv.move
-const moves = ['rock', 'paper', 'scissors']
-const computerMove = moves[Math.floor(Math.random() * moves.length)]
-
-var winningMoves = {
-    'rock': 'paper',
-    'paper': 'scissors',
-    'scissors': 'rock'
-}
-
 class Game {
 
     constructor(playerMove, computerMove, winningMoves) {
@@ -38,6 +28,16 @@ class Output {
         console.log('Computer plays '+game.computerMove+'!')
         console.log(game.result)
     }
+}
+
+const playerMove = argv.move
+const moves = ['rock', 'paper', 'scissors']
+const computerMove = moves[Math.floor(Math.random() * moves.length)]
+
+var winningMoves = {
+    'rock': 'paper',
+    'paper': 'scissors',
+    'scissors': 'rock'
 }
 
 var game = new Game(playerMove, computerMove, winningMoves)
